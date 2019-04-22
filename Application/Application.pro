@@ -1,4 +1,4 @@
-QT += quick
+QT += qml quick
 CONFIG += c++17
 
 # The following define makes your compiler emit warnings if you use
@@ -17,8 +17,6 @@ SOURCES += \
 
 RESOURCES += resources/qml.qrc
 
-DESTDIR += build
-
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
 
@@ -29,3 +27,8 @@ QML_DESIGNER_IMPORT_PATH =
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+contains (ANDROID_TARGET_ARCH, arm64-v8a) {
+    path = $$[QT_INSTALL_PREFIX]/libs/arm64-v8a/libLabWork.so
+    ANDROID_EXTRA_LIBS += $$path
+}

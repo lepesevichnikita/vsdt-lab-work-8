@@ -1,22 +1,42 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.5
-import QtQuick.Layouts 1.12
+import QtQuick.Layouts 1.1
+import QtQuick.Dialogs 1.2
+
+import vsdt.lab.work 1.0
 
 Page {
     id: root
-    title: qsTr("Первое задание")
 
+    Task1 {
+        id: task1
+    }
+
+    FileDialog {
+        id: saveFileDialog
+        title: qsTr("Сохранить файл")
+        selectExisting: false
+        selectMultiple: false
+        onAccepted: {
+            task1.outputFilePath = fileUrl
+            task1.writeResultToFile()
+        }
+    }
+
+    title: qsTr("Первое задание")
     header: RowLayout {
         Label {
             text: title
             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
             font.pointSize: 20
         }
-        Button {
-            id: saveButton
-            Layout.margins: 20
+        RowLayout {
             Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
-            text: qsTr("Сохранить")
+            Button {
+                id: saveButton
+                text: qsTr("Сохранить")
+                onClicked: saveFileDialog.open()
+            }
         }
     }
 
@@ -32,7 +52,9 @@ Page {
         }
         TextField {
             Layout.fillWidth: true
+            text: task1.sourceText
             placeholderText: qsTr("Введите исходный текст")
+            onEditingFinished: task1.sourceText = text
         }
         Label {
             font.pointSize: 11
@@ -41,6 +63,7 @@ Page {
         TextField {
             Layout.fillWidth: true
             placeholderText: qsTr("Результат")
+            text: task1.resultText
             readOnly: true
             selectByMouse: true
         }

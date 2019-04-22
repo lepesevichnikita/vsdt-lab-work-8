@@ -5,17 +5,17 @@ ApplicationWindow {
     visible: true
     width: 640
     height: 480
-    title: qsTr("Tab")
+    title: qsTr("Lab work")
 
     SwipeView {
         id: swipeView
         anchors.fill: parent
         currentIndex: tabBar.currentIndex
 
-        Task1 {
+        Task1Page {
         }
 
-        Task2  {
+        Task2 {
         }
     }
 
@@ -30,3 +30,9 @@ ApplicationWindow {
         }
     }
 }
+
+/*##^## Designer {
+    D{i:0;autoSize:true;height:480;width:640}
+}
+ ##^##*/
+
