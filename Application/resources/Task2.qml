@@ -1,17 +1,16 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.5
 
-Page {
-    title: qsTr("Второе задание")
+import vsdt.lab.work 1.0
 
-    header: Label {
-        text: qsTr("Page 2")
-        font.pixelSize: Qt.application.font.pixelSize * 2
-        padding: 10
-    }
+Task2Page {
+    id: root
+    isInputTextCorrect: task.isInputTextCorrect
 
-    Label {
-        text: qsTr("You are on Page 2.")
-        anchors.centerIn: parent
+    Task2 {
+        id: task
+        inputText: root.inputText
+        onIsInputTextCorrectChanged: print(isInputTextCorrect)
+        isInputTextCorrect: true
     }
 }

@@ -1,8 +1,9 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
-        <file>Task2.qml</file>
+        <file>Task2Page.ui.qml</file>
         <file>qtquickcontrols2.conf</file>
         <file>Task1Page.qml</file>
+        <file>Task2.qml</file>
     </qresource>
 </RCC>

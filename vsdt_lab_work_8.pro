@@ -4,7 +4,7 @@
 
 TEMPLATE = subdirs
 SUBDIRS += \
-        Application/Plugins/LabWork \
+        Application/Plugins/vsdt/lab/work \
         Application
 
 CONFIG += ordered

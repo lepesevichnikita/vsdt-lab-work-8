@@ -1,4 +1,4 @@
-QT += qml quick
+QT += qml quick widgets
 CONFIG += c++17
 
 # The following define makes your compiler emit warnings if you use
@@ -18,7 +18,7 @@ SOURCES += \
 RESOURCES += resources/qml.qrc
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
-QML_IMPORT_PATH =
+QML_IMPORT_PATH += $$OUT_PWD/Plugins/vsdt/lab/work
 
 # Additional import path used to resolve QML modules just for Qt Quick Designer
 QML_DESIGNER_IMPORT_PATH =
@@ -29,6 +29,22 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 contains (ANDROID_TARGET_ARCH, arm64-v8a) {
-    path = $$[QT_INSTALL_PREFIX]/libs/arm64-v8a/libLabWork.so
+    path = $$OUT_PWD/Plugins/vsdt/lab/work/libwork.so
     ANDROID_EXTRA_LIBS += $$path
+
+  ANDROID_PACKAGE_SOURCE_DIR = \
+    $$PWD/android
 }
+
+android {
+    QT += androidextras
+}
+
+DISTFILES += \
+  android/AndroidManifest.xml \
+  android/build.gradle \
+  android/gradle/wrapper/gradle-wrapper.jar \
+  android/gradle/wrapper/gradle-wrapper.properties \
+  android/gradlew \
+  android/gradlew.bat \
+  android/res/values/libs.xml

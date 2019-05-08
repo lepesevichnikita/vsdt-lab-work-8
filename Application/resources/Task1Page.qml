@@ -1,30 +1,32 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.5
 import QtQuick.Layouts 1.1
-import QtQuick.Dialogs 1.2
+import Qt.labs.platform 1.1
 
 import vsdt.lab.work 1.0
 
 Page {
     id: root
+    title: "Первое задание"
 
     Task1 {
         id: task1
+        outputFilePath: saveFileDialog.currentFile
     }
 
     FileDialog {
         id: saveFileDialog
         title: qsTr("Сохранить файл")
-        selectExisting: false
-        selectMultiple: false
+        acceptLabel: qsTr("Сохранить")
+        defaultSuffix: ".txt"
+        fileMode: FileDialog.SaveFile
         onAccepted: {
-            task1.outputFilePath = fileUrl
             task1.writeResultToFile()
         }
     }
 
-    title: qsTr("Первое задание")
     header: RowLayout {
+        anchors.margins: 20
         Label {
             text: title
             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
@@ -35,7 +37,9 @@ Page {
             Button {
                 id: saveButton
                 text: qsTr("Сохранить")
-                onClicked: saveFileDialog.open()
+                onClicked: {
+                    saveFileDialog.open()
+                }
             }
         }
     }
@@ -69,3 +73,11 @@ Page {
         }
     }
 }
+
+
+
+
+/*##^## Designer {
+    D{i:0;autoSize:true;height:480;width:640}
+}
+ ##^##*/

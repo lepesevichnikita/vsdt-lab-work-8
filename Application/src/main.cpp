@@ -1,20 +1,18 @@
+#include <QApplication>
 #include <QDebug>
-#include <QGuiApplication>
 #include <QQmlApplicationEngine>
 
 int main(int argc, char *argv[])
 {
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
-    QGuiApplication app(argc, argv);
-
+    QApplication app(argc, argv);
     QQmlApplicationEngine engine;
     const QUrl url(QStringLiteral("qrc:/main.qml"));
-    const QString modulesImportPath = app.applicationDirPath() + "/Plugins";
-    engine.addImportPath(modulesImportPath);
-    engine.addImportPath(modulesImportPath + "/LabWork");
-    foreach (QString path, engine.importPathList())
-        qDebug() << path;
+    engine.addImportPath(app.applicationDirPath() + "/Plugins");
+    engine.addImportPath(app.applicationDirPath() + "/Plugins/vsdt");
+    engine.addImportPath(app.applicationDirPath() + "/Plugins/vsdt/lab");
+    engine.addImportPath(app.applicationDirPath() + "/Plugins/vsdt/lab/work");
     QObject::connect(&engine,
                      &QQmlApplicationEngine::objectCreated,
                      &app,

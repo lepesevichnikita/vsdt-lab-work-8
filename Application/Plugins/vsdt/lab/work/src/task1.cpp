@@ -37,16 +37,16 @@ void Task1::writeResultToFile()
 void Task1::calculateResult(const QString &sourceText)
 {
     QString result = sourceText;
-    QRegularExpression regExpSentence("\\b((?!=|\\!|\?|\\.).)+(.)\\b");
-    QRegularExpressionMatch match = regExpSentence.match(sourceText);
-    if (match.hasMatch()) {
-        QStringRef sentence = match.capturedRef(2);
-        QString sentenceCopy = (*sentence.string());
-        if (!sentence.isEmpty()) {
-            sentenceCopy = replaceTwoWordsInSentence(sentenceCopy, 2, 3);
+    QString sentencePattern = QString::fromLatin1("(\\.|\\?|\\!)+(\\s|\\W)*");
+    QRegularExpression regExpSentence(sentencePattern);
+    QStringList sentences = sourceText.split(regExpSentence);
+    for (auto sentence : sentences)
+        if (sentences.count() >= 2) {
+            QString requiredSentence = sentences[1];
+            int sentencePos = result.indexOf(sentences[1]);
+            QString processedSentence = replaceTwoWordsInSentence(sentences[1], 1, 2);
+            result = result.replace(sentencePos, processedSentence.length(), processedSentence);
         }
-        replaceRefByWord(result, sentence, sentenceCopy);
-    }
     setResultText(result);
 }
 
@@ -89,22 +89,13 @@ QString Task1::replaceTwoWordsInSentence(const QString &sourceText,
                                          const int &secondWordPos)
 {
     QString result = sourceText;
-    QRegularExpression regExpWord("\\w+");
-    QRegularExpressionMatch wordMatch = regExpWord.match(result);
-    if (wordMatch.hasMatch()) {
-        QStringRef firstWordRef = wordMatch.capturedRef(firstWordPos);
-        if (!firstWordRef.isEmpty()) {
-            QString firstWordCopy = *firstWordRef.string();
-            QString secondWord = wordMatch.captured(secondWordPos);
-            if (!secondWord.isEmpty()) {
-                replaceRefByWord(result, firstWordRef, secondWord);
-                wordMatch = regExpWord.match(result);
-                if (wordMatch.hasMatch()) {
-                    QStringRef secondWordRef = wordMatch.capturedRef(secondWordPos);
-                    replaceRefByWord(result, secondWordRef, firstWordCopy);
-                }
-            }
-        }
+    QStringList words = result.split(' ');
+    if (words.count() >= secondWordPos) {
+        QString firstTempWord = words[firstWordPos];
+        QString secondTempWord = words[secondWordPos];
+        words.replace(firstWordPos, secondTempWord);
+        words.replace(secondWordPos, firstTempWord);
+        result = words.join(' ');
     }
     return result;
 }
