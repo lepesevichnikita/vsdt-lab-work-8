@@ -7,10 +7,15 @@ Task2Page {
     id: root
     isInputTextCorrect: task.isInputTextCorrect
 
+    header: Label {
+        text: qsTr("Второе задание")
+        font.pixelSize: Qt.application.font.pixelSize * 2
+        padding: 10
+    }
+
     Task2 {
         id: task
         inputText: root.inputText
-        onIsInputTextCorrectChanged: print(isInputTextCorrect)
         isInputTextCorrect: true
     }
 }

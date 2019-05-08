@@ -5,5 +5,7 @@
         <file>qtquickcontrols2.conf</file>
         <file>Task1Page.qml</file>
         <file>Task2.qml</file>
+        <file>Task3.qml</file>
+        <file>Task3Form.ui.qml</file>
     </qresource>
 </RCC>

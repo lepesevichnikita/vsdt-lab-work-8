@@ -11,13 +11,15 @@ INCLUDEPATH += src \
 # Input
 SOURCES += \
         src/task2.cpp \
-        src/labwork_plugin.cpp \
-        src/task1.cpp
+        src/task1.cpp \
+        src/task3.cpp \
+        src/work_plugin.cpp
 
 HEADERS += \
-        include/labwork_plugin.h \
         include/task1.h \
-        include/task2.h
+        include/task2.h \
+        include/task3.h \
+        include/work_plugin.h
 
 DISTFILES = qmldir
 

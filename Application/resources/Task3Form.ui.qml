@@ -4,14 +4,10 @@ import QtQuick.Layouts 1.12
 import QtQuick.Dialogs 1.3
 
 Page {
-    title: qsTr("Второе задание")
-    width: 640
-    height: 480
-
+    width: 400
+    height: 400
     property string inputText: ""
-    property bool isInputTextCorrect: true
-
-    header: headerItem
+    property string lastWord: ""
 
     GridLayout {
         anchors.fill: parent
@@ -23,27 +19,26 @@ Page {
             text: qsTr("Текст")
         }
         TextField {
-            Layout.fillWidth: true
             Layout.fillHeight: true
-            text: inputText
-            placeholderText: qsTr("Введите текст для проверки")
+            Layout.fillWidth: true
+            placeholderText: qsTr("Введите текст")
             onEditingFinished: inputText = text
         }
     }
     MessageDialog {
-        id: mistakesWindow
+        id: lastWordDialog
         visible: false
         standardButtons: StandardButton.Ok
-        informativeText: qsTr("В тексте содержатся ошибки")
-        detailedText: qsTr("ЧА/ЩА пиши с буквой А")
-        onAccepted: visible = false
+        informativeText: qsTr("Последнее слово найдено")
+        detailedText: lastWord
     }
+
     states: [
         State {
-            name: "hasMistakes"
-            when: !isInputTextCorrect
+            name: "hasLastWord"
+            when: lastWord.length > 0
             PropertyChanges {
-                target: mistakesWindow
+                target: lastWordDialog
                 visible: true
             }
         }

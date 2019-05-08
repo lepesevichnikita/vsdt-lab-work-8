@@ -3,6 +3,8 @@
 
 #include "task1.h"
 #include "task2.h"
+#include "task3.h"
+
 #include <QQmlExtensionPlugin>
 
 class LabWorkPlugin : public QQmlExtensionPlugin

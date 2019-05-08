@@ -17,6 +17,9 @@ ApplicationWindow {
 
         Task2 {
         }
+
+        Task3 {
+        }
     }
 
     footer: TabBar {

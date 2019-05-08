@@ -1,4 +1,4 @@
-#include "labwork_plugin.h"
+#include "work_plugin.h"
 
 #include <qqml.h>
 
@@ -7,4 +7,5 @@ void LabWorkPlugin::registerTypes(const char *uri)
     // @uri vsdt.lab.work
     qmlRegisterType<Task1>(uri, 1, 0, "Task1");
     qmlRegisterType<Task2>(uri, 1, 0, "Task2");
+    qmlRegisterType<Task3>(uri, 1, 0, "Task3");
 }
