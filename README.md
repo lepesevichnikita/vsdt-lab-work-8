@@ -12,6 +12,5 @@ Check for the compilance with the rules of the Russian language ("ча/ща").
 
 Get last word of entered text
 
-* [Application/src](./Application/src) -- sources for each task
-* [Application/Plugins](./Application/Plugins) -- qml plugin for lab work
-* [Application/resources](./Application/resources) -- qml views and forms for lab work
+* [Application/Plugins](./Application/Plugins) - qml plugin for lab work
+* [Application/resources](./Application/resources) - qml views and forms for lab work
