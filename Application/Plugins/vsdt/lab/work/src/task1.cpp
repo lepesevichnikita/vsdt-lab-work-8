@@ -38,13 +38,14 @@ void Task1::calculateResult(const QString &sourceText)
 {
     QString result = sourceText;
     QString sentencePattern = QString::fromLatin1("(\\.|\\?|\\!)+(\\s|\\W)*");
-    QRegularExpression regExpSentence(sentencePattern);
+    QRegularExpression regExpSentence(sentencePattern,
+                                      QRegularExpression::UseUnicodePropertiesOption);
     QStringList sentences = sourceText.split(regExpSentence);
     for (auto sentence : sentences)
         if (sentences.count() >= 2) {
             QString requiredSentence = sentences[1];
             int sentencePos = result.indexOf(sentences[1]);
-            QString processedSentence = replaceTwoWordsInSentence(sentences[1], 1, 2);
+            QString processedSentence = replaceTwoWordsInSentence(requiredSentence, 1, 2);
             result = result.replace(sentencePos, processedSentence.length(), processedSentence);
         }
     setResultText(result);
